@@ -1,6 +1,7 @@
 #window {
-    padding: 53px;
+    padding: 20px;
     background-color: #52B640;
+    text-align: start;
 }
 #device {
     background-color: #FF6EC7;
