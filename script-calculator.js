@@ -4,13 +4,15 @@ const mult = "multiplication";
 const div = "division";
 const numberInUse = {
     first: '',
+    operator: '',
+    second: '',
 };
 
+
+var buttonAdd = document.getElementById("add");
 var windowView = document.getElementById("window");
-// var buttons = document.getElementById("1");
 const buttonsNum = document.querySelectorAll('.numbers');
 
-console.log(buttonsNum);
 //to populate number on the display after pressing the button
 for (i = 0; i < buttonsNum.length; i++) {
     buttonsNum[i].addEventListener('click', function (e) {
@@ -21,10 +23,22 @@ for (i = 0; i < buttonsNum.length; i++) {
     });
 }
 
+const data = new Array;
 
-// buttons.addEventListener('click', function (e) {
-//     windowView.textContent += buttons.textContent;
-// });
+buttonAdd.addEventListener('click', function(e) {
+    numberInUse.operator = add;
+    var saveMe= parseInt(numberInUse.first);
+    data.push(saveMe);
+    numberInUse.first = '';
+    const result = data.reduce(addition);
+    console.log(result);
+})
+
+// const resultCount = data.reduce(addition);
+// console.log(numberInUse.first);
+console.log(data);
+
+// const result = data.reduce(addition);
 
 //simple functions to count
 function addition(total, current) {
