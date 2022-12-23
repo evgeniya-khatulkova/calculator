@@ -10,3 +10,6 @@
 body{
     background-color: white;
 }
+.pressed {
+    background-color: aqua;
+}

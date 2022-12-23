@@ -10,12 +10,17 @@ const numberInUse = {
 
 
 var buttonAdd = document.getElementById("add");
+var buttonSub = document.getElementById("sub");
 var windowView = document.getElementById("window");
 const buttonsNum = document.querySelectorAll('.numbers');
 
 //to populate number on the display after pressing the button
 for (i = 0; i < buttonsNum.length; i++) {
     buttonsNum[i].addEventListener('click', function (e) {
+        if(buttonSub.classList.contains("pressed")) {
+            windowView.textContent = '';
+            buttonSub.classList.remove("pressed");
+        }
         windowView.textContent += e.target.id;
         var toInt = [];
         toInt = e.target.id;
@@ -31,6 +36,18 @@ buttonAdd.addEventListener('click', function(e) {
     data.push(saveMe);
     numberInUse.first = '';
     const result = data.reduce(addition);
+    windowView.textContent = result;
+    console.log(result);
+})
+
+buttonSub.addEventListener('click', function(e) {
+    numberInUse.operator = sub;
+    var saveMe= parseInt(numberInUse.first);
+    data.push(saveMe);
+    numberInUse.first = '';
+    const result = data.reduce(substract);
+    windowView.textContent = result;
+    buttonSub.classList.add("pressed");
     console.log(result);
 })
 
