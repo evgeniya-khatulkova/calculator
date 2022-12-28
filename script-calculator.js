@@ -1,26 +1,39 @@
 const add = "addition";
 const sub = "substraction";
 const mult = "multiplication";
-const div = "division";
+const divi = "division";
 const numberInUse = {
     first: '',
     operator: '',
-    second: '',
 };
-
+const operator = new Array;
 
 var buttonAdd = document.getElementById("add");
 var buttonSub = document.getElementById("sub");
+var buttonMult = document.getElementById("mult");
+var buttonDivi = document.getElementById("divi");
+
+var buttonEqual = document.getElementById("equal");
+
 var windowView = document.getElementById("window");
 const buttonsNum = document.querySelectorAll('.numbers');
+const buttonsOper = [...document.querySelectorAll('.operator')];
+
+const hasIt = (element) => element.classList.contains("pressed");
+console.log(buttonsOper.some(hasIt));
 
 //to populate number on the display after pressing the button
 for (i = 0; i < buttonsNum.length; i++) {
     buttonsNum[i].addEventListener('click', function (e) {
-        if(buttonSub.classList.contains("pressed")) {
+        if(buttonsOper.some(hasIt)) {
             windowView.textContent = '';
-            buttonSub.classList.remove("pressed");
+            buttonsOper.forEach(buttonO => {buttonO.classList.remove("pressed")});
         }
+        // if(buttonSub.classList.contains("pressed")) {
+        //     windowView.textContent = '';
+        //     buttonSub.classList.remove("pressed");
+        // }
+
         windowView.textContent += e.target.id;
         var toInt = [];
         toInt = e.target.id;
@@ -29,7 +42,9 @@ for (i = 0; i < buttonsNum.length; i++) {
 }
 
 const data = new Array;
+console.log(data);
 
+// for addition +
 buttonAdd.addEventListener('click', function(e) {
     numberInUse.operator = add;
     var saveMe= parseInt(numberInUse.first);
@@ -37,9 +52,11 @@ buttonAdd.addEventListener('click', function(e) {
     numberInUse.first = '';
     const result = data.reduce(addition);
     windowView.textContent = result;
+    buttonAdd.classList.add("pressed");
     console.log(result);
 })
 
+// for substraction -
 buttonSub.addEventListener('click', function(e) {
     numberInUse.operator = sub;
     var saveMe= parseInt(numberInUse.first);
@@ -51,11 +68,39 @@ buttonSub.addEventListener('click', function(e) {
     console.log(result);
 })
 
-// const resultCount = data.reduce(addition);
-// console.log(numberInUse.first);
+//for multiplication *
+buttonMult.addEventListener('click', function(e) {
+    numberInUse.operator = mult;
+    var saveMe= parseInt(numberInUse.first);
+    data.push(saveMe);
+    numberInUse.first = '';
+    const result = data.reduce(multiple);
+    windowView.textContent = result;
+    buttonMult.classList.add("pressed");
+    console.log(result);
+})
+
+//for division /
+buttonDivi.addEventListener('click', function(e) {
+    numberInUse.operator = divi;
+    var saveMe= parseInt(numberInUse.first);
+    data.push(saveMe);
+    numberInUse.first = '';
+    const result = data.reduce(division);
+    windowView.textContent = result;
+    buttonDivi.classList.add("pressed");
+    console.log(result);
+})
+
+//for equal
+buttonEqual.addEventListener('click', function(e) {
+    const result = data.reduce(operate(numberInUse));
+    windowView.textContent = result;
+    console.log(result);
+})
+
 console.log(data);
 
-// const result = data.reduce(addition);
 
 //simple functions to count
 function addition(total, current) {
