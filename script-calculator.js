@@ -5,6 +5,8 @@ const divi = "division";
 const numberInUse = {
     first: '',
     operator: '',
+    total: '',
+    current:''
 };
 const operator = new Array;
 
@@ -14,6 +16,7 @@ var buttonMult = document.getElementById("mult");
 var buttonDivi = document.getElementById("divi");
 
 var buttonEqual = document.getElementById("equal");
+var buttonAc = document.getElementById("reset");
 
 var windowView = document.getElementById("window");
 const buttonsNum = document.querySelectorAll('.numbers');
@@ -33,7 +36,6 @@ for (i = 0; i < buttonsNum.length; i++) {
         //     windowView.textContent = '';
         //     buttonSub.classList.remove("pressed");
         // }
-
         windowView.textContent += e.target.id;
         var toInt = [];
         toInt = e.target.id;
@@ -41,17 +43,19 @@ for (i = 0; i < buttonsNum.length; i++) {
     });
 }
 
-const data = new Array;
+var data = new Array;
 console.log(data);
 
 // for addition +
 buttonAdd.addEventListener('click', function(e) {
     numberInUse.operator = add;
     var saveMe= parseInt(numberInUse.first);
+    numberInUse.current = saveMe;
     data.push(saveMe);
     numberInUse.first = '';
     const result = data.reduce(addition);
     windowView.textContent = result;
+    numberInUse.total = result;
     buttonAdd.classList.add("pressed");
     console.log(result);
 })
@@ -101,6 +105,10 @@ buttonEqual.addEventListener('click', function(e) {
 
 console.log(data);
 
+buttonAc.addEventListener('click', function(e) {
+    windowView.textContent = '';
+    data = [];
+});
 
 //simple functions to count
 function addition(total, current) {
