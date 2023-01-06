@@ -6,6 +6,7 @@ const numberInUse = {
     first: '',
     operator: '',
     total: 0,
+    total2: 1,
     current:'',
 };
 
@@ -76,10 +77,13 @@ buttonMult.addEventListener('click', function(e) {
     numberInUse.operator = mult;
     var saveMe= parseInt(numberInUse.first);
     numberInUse.current = saveMe;
-    data.push(saveMe);
+    // data.push(saveMe);
     numberInUse.first = '';
-    const result = data.reduce(multiple);
+    // const result = data.reduce(multiple);
+    var result = multiple(numberInUse.current, numberInUse.total2);
     windowView.textContent = result;
+    numberInUse.total = result;
+    numberInUse.total2 = result;
     buttonMult.classList.add("pressed");
     console.log(result);
 })
@@ -89,10 +93,13 @@ buttonDivi.addEventListener('click', function(e) {
     numberInUse.operator = divi;
     var saveMe= parseInt(numberInUse.first);
     numberInUse.current = saveMe;
-    data.push(saveMe);
+    // data.push(saveMe);
     numberInUse.first = '';
-    const result = data.reduce(division);
+    // const result = data.reduce(division);
+    var result = division(numberInUse.current, numberInUse.total2);
     windowView.textContent = result;
+    numberInUse.total = result;
+    numberInUse.total2 = result;
     buttonDivi.classList.add("pressed");
     console.log(result);
 })
@@ -106,6 +113,7 @@ buttonEqual.addEventListener('click', function(e) {
     // numberInUse.total = numN;
     numberInUse.first = numN;
     numberInUse.total = 0;
+    numberInUse.total2 = 1;
     numberInUse.current = 0;
 })
 
