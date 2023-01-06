@@ -6,7 +6,7 @@ const numberInUse = {
     first: '',
     operator: '',
     total: 0,
-    current:''
+    current:'',
 };
 
 var buttonAdd = document.getElementById("add");
@@ -61,10 +61,12 @@ buttonSub.addEventListener('click', function(e) {
     numberInUse.operator = sub;
     var saveMe= parseInt(numberInUse.first);
     numberInUse.current = saveMe;
-    data.push(saveMe);
+    // data.push(saveMe);
     numberInUse.first = '';
-    const result = data.reduce(substract);
+    // const result = data.reduce(substract);
+    var result = substract(numberInUse.current, numberInUse.total);
     windowView.textContent = result;
+    numberInUse.total = result;
     buttonSub.classList.add("pressed");
     console.log(result);
 })
