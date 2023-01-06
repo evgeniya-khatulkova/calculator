@@ -5,7 +5,7 @@ const divi = "division";
 const numberInUse = {
     first: '',
     operator: '',
-    total: '',
+    total: 0,
     current:''
 };
 
@@ -22,7 +22,6 @@ const buttonsNum = document.querySelectorAll('.numbers');
 const buttonsOper = [...document.querySelectorAll('.operator')];
 
 const hasIt = (element) => element.classList.contains("pressed");
-console.log(buttonsOper.some(hasIt));
 
 //to populate number on the display after pressing the button
 for (i = 0; i < buttonsNum.length; i++) {
@@ -31,10 +30,6 @@ for (i = 0; i < buttonsNum.length; i++) {
             windowView.textContent = '';
             buttonsOper.forEach(buttonO => {buttonO.classList.remove("pressed")});
         }
-        // if(buttonSub.classList.contains("pressed")) {
-        //     windowView.textContent = '';
-        //     buttonSub.classList.remove("pressed");
-        // }
         windowView.textContent += e.target.id;
         var toInt = [];
         toInt = e.target.id;
@@ -43,19 +38,19 @@ for (i = 0; i < buttonsNum.length; i++) {
 }
 
 var data = new Array;
-console.log(data);
 
 // for addition +
 buttonAdd.addEventListener('click', function(e) {
     numberInUse.operator = add;
     var saveMe= parseInt(numberInUse.first);
     numberInUse.current = saveMe;
-    data.push(saveMe);
+    // data.push(saveMe);
     numberInUse.first = '';
-    const result = data.reduce(addition);
+    // const result = data.reduce(addition);
+    var result = addition(numberInUse.total, numberInUse.current);
     windowView.textContent = result;
-    data = [];
-    data.push(result);
+    // data = [];
+    // data.push(result);
     numberInUse.total = result;
     buttonAdd.classList.add("pressed");
     console.log(result);
@@ -102,8 +97,14 @@ buttonDivi.addEventListener('click', function(e) {
 
 //for equal
 buttonEqual.addEventListener('click', function(e) {
-    var numN = operate(parseInt(numberInUse.current), numberInUse.operator, parseInt(numberInUse.first));
+    var numN = operate(parseInt(numberInUse.total), numberInUse.operator, parseInt(numberInUse.first));
     windowView.textContent = numN;
+    // data = [];
+    // data.push(numN);
+    // numberInUse.total = numN;
+    numberInUse.first = numN;
+    numberInUse.total = 0;
+    numberInUse.current = 0;
 })
 
 console.log(data);
@@ -111,6 +112,10 @@ console.log(data);
 buttonAc.addEventListener('click', function(e) {
     windowView.textContent = '';
     data = [];
+    numberInUse.current = '';
+    numberInUse.operator = '';
+    numberInUse.first = '';
+    numberInUse.total = '';
 });
 
 //simple functions to count
