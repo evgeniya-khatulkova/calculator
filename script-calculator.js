@@ -38,16 +38,12 @@ for (i = 0; i < buttonsNum.length; i++) {
     });
 }
 
-var data = new Array;
-
 // for addition +
 buttonAdd.addEventListener('click', function(e) {
     // numberInUse.operator = add;
     var saveMe= parseInt(numberInUse.first);
     numberInUse.current = saveMe;
-    // data.push(saveMe);
     numberInUse.first = '';
-    // const result = data.reduce(addition);
     if(numberInUse.operator === '')
     {
         var result = addition(numberInUse.total, numberInUse.current); 
@@ -59,8 +55,6 @@ buttonAdd.addEventListener('click', function(e) {
     var result = operate(numberInUse.total, numberInUse.operator, numberInUse.current);
     // var result = addition(numberInUse.total, numberInUse.current);
     windowView.textContent = result;
-    // data = [];
-    // data.push(result);
     numberInUse.total = result;
     numberInUse.operator = add;
     buttonAdd.classList.add("pressed");
@@ -78,41 +72,56 @@ buttonSub.addEventListener('click', function(e) {
       buttonSub.classList.add("pressed");
     return
     }
-    numberInUse.operator = sub;
+    // numberInUse.operator = sub;
     var saveMe= parseInt(numberInUse.first);
     numberInUse.current = saveMe;
-    // data.push(saveMe);
     numberInUse.first = '';
-    // const result = data.reduce(substract);
-    var result = substract(numberInUse.total, numberInUse.current);
+    if(numberInUse.operator === '')
+    {
+        var result = substract(numberInUse.total, numberInUse.current); 
+        numberInUse.total = result;
+        numberInUse.operator = sub;
+        buttonAdd.classList.add("pressed");
+        return;
+    }
+    var result = operate(numberInUse.total, numberInUse.operator, numberInUse.current);
+    // var result = substract(numberInUse.total, numberInUse.current);
     windowView.textContent = result;
     numberInUse.total = result;
+    numberInUse.operator = sub;
     buttonSub.classList.add("pressed");
     console.log(result);
 })
 
 //for multiplication *
 buttonMult.addEventListener('click', function(e) {
-    numberInUse.operator = mult;
+    // numberInUse.operator = mult;
     var saveMe= parseInt(numberInUse.first);
     numberInUse.current = saveMe;
-    // data.push(saveMe);
     numberInUse.first = '';
-    // const result = data.reduce(multiple);
-    var result = multiple(numberInUse.current, numberInUse.total2);
+    if(numberInUse.operator === '')
+    { 
+        var result = multiple(numberInUse.current, numberInUse.total2);
+        numberInUse.total = result;
+        numberInUse.operator = mult;
+        buttonMult.classList.add("pressed");
+        return;
+    }
+    var result = operate(numberInUse.total, numberInUse.operator, numberInUse.current);
+    // var result = multiple(numberInUse.current, numberInUse.total2);
     windowView.textContent = result;
     numberInUse.total = result;
     numberInUse.total2 = result;
+    numberInUse.operator = mult;
     buttonMult.classList.add("pressed");
     console.log(result);
 })
 
 //for division /
 buttonDivi.addEventListener('click', function(e) {
-    numberInUse.operator = divi;
+    // numberInUse.operator = divi;
     var saveMe= parseInt(numberInUse.first);
     numberInUse.current = saveMe;
-    // data.push(saveMe);
     numberInUse.first = '';
     if(numberInUse.operator === "division" && saveMe === 0) {
         windowView.textContent = "Don't do it, refresh please";
@@ -121,16 +130,25 @@ buttonDivi.addEventListener('click', function(e) {
     }
         return
     }
-    // const result = data.reduce(division);
-    var result = division(numberInUse.current, numberInUse.total2);
+    if(numberInUse.operator === '')
+    { 
+        var result = division(numberInUse.current, numberInUse.total2);
+        numberInUse.total = result;
+        numberInUse.operator = divi;
+        buttonDivi.classList.add("pressed");
+        return;
+    }
+    var result = operate(numberInUse.total, numberInUse.operator, numberInUse.current);
+    // var result = division(numberInUse.current, numberInUse.total2);
     windowView.textContent = result;
     numberInUse.total = result;
     numberInUse.total2 = result;
+    numberInUse.operator = divi;
     buttonDivi.classList.add("pressed");
     console.log(result);
 })
 
-//for equal
+//for equal =
 buttonEqual.addEventListener('click', function(e) {
     if(numberInUse.operator === "division" && numberInUse.first === '0') {
         windowView.textContent = "Don't do it, refresh please";
@@ -141,16 +159,12 @@ buttonEqual.addEventListener('click', function(e) {
     }
     var numN = operate(parseInt(numberInUse.total), numberInUse.operator, parseInt(numberInUse.first));
     windowView.textContent = numN;
-    // data = [];
-    // data.push(numN);
     // numberInUse.total = numN;
     numberInUse.first = numN;
     numberInUse.total = 0;
     numberInUse.total2 = 1;
     numberInUse.current = '';
 })
-
-console.log(data);
 
 buttonAc.addEventListener('click', function(e) {
     windowView.textContent = '';
