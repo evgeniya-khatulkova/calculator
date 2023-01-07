@@ -9,7 +9,7 @@ const numberInUse = {
     total2: 1,
     current:'',
 };
-
+var AllButExAc = document.querySelectorAll('.numbers, .operator ,#equal');
 var buttonAdd = document.getElementById("add");
 var buttonSub = document.getElementById("sub");
 var buttonMult = document.getElementById("mult");
@@ -95,6 +95,13 @@ buttonDivi.addEventListener('click', function(e) {
     numberInUse.current = saveMe;
     // data.push(saveMe);
     numberInUse.first = '';
+    if(numberInUse.operator === "division" && saveMe === 0) {
+        windowView.textContent = "Don't do it, refresh please";
+        for(var i = 0; i < AllButExAc.length; i++) {
+            AllButExAc[i].disabled = true;
+    }
+        return
+    }
     // const result = data.reduce(division);
     var result = division(numberInUse.current, numberInUse.total2);
     windowView.textContent = result;
@@ -106,6 +113,13 @@ buttonDivi.addEventListener('click', function(e) {
 
 //for equal
 buttonEqual.addEventListener('click', function(e) {
+    if(numberInUse.operator === "division" && numberInUse.first === '0') {
+        windowView.textContent = "Don't do it, refresh please";
+        for(var i = 0; i < AllButExAc.length; i++) {
+            AllButExAc[i].disabled = true;
+    }
+        return
+    }
     var numN = operate(parseInt(numberInUse.total), numberInUse.operator, parseInt(numberInUse.first));
     windowView.textContent = numN;
     // data = [];
@@ -126,6 +140,9 @@ buttonAc.addEventListener('click', function(e) {
     numberInUse.operator = '';
     numberInUse.first = '';
     numberInUse.total = '';
+    for(var i = 0; i < AllButExAc.length; i++) {
+        AllButExAc[i].disabled = false;
+}
 });
 
 //simple functions to count
