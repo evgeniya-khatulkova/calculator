@@ -42,30 +42,49 @@ var data = new Array;
 
 // for addition +
 buttonAdd.addEventListener('click', function(e) {
-    numberInUse.operator = add;
+    // numberInUse.operator = add;
     var saveMe= parseInt(numberInUse.first);
     numberInUse.current = saveMe;
     // data.push(saveMe);
     numberInUse.first = '';
     // const result = data.reduce(addition);
-    var result = addition(numberInUse.total, numberInUse.current);
+    if(numberInUse.operator === '')
+    {
+        var result = addition(numberInUse.total, numberInUse.current); 
+        numberInUse.total = result;
+        numberInUse.operator = add;
+        buttonAdd.classList.add("pressed");
+        return;
+    }
+    var result = operate(numberInUse.total, numberInUse.operator, numberInUse.current);
+    // var result = addition(numberInUse.total, numberInUse.current);
     windowView.textContent = result;
     // data = [];
     // data.push(result);
     numberInUse.total = result;
+    numberInUse.operator = add;
     buttonAdd.classList.add("pressed");
     console.log(result);
 })
 
 // for substraction -
 buttonSub.addEventListener('click', function(e) {
+    if(numberInUse.current === '') {
+      numberInUse.operator = sub;
+      var saveMe= parseInt(numberInUse.first);
+      numberInUse.current = saveMe;
+      numberInUse.total = saveMe;
+      numberInUse.first = '';
+      buttonSub.classList.add("pressed");
+    return
+    }
     numberInUse.operator = sub;
     var saveMe= parseInt(numberInUse.first);
     numberInUse.current = saveMe;
     // data.push(saveMe);
     numberInUse.first = '';
     // const result = data.reduce(substract);
-    var result = substract(numberInUse.current, numberInUse.total);
+    var result = substract(numberInUse.total, numberInUse.current);
     windowView.textContent = result;
     numberInUse.total = result;
     buttonSub.classList.add("pressed");
@@ -97,7 +116,7 @@ buttonDivi.addEventListener('click', function(e) {
     numberInUse.first = '';
     if(numberInUse.operator === "division" && saveMe === 0) {
         windowView.textContent = "Don't do it, refresh please";
-        for(var i = 0; i < AllButExAc.length; i++) {
+           for(var i = 0; i < AllButExAc.length; i++) {
             AllButExAc[i].disabled = true;
     }
         return
@@ -128,7 +147,7 @@ buttonEqual.addEventListener('click', function(e) {
     numberInUse.first = numN;
     numberInUse.total = 0;
     numberInUse.total2 = 1;
-    numberInUse.current = 0;
+    numberInUse.current = '';
 })
 
 console.log(data);
@@ -139,7 +158,8 @@ buttonAc.addEventListener('click', function(e) {
     numberInUse.current = '';
     numberInUse.operator = '';
     numberInUse.first = '';
-    numberInUse.total = '';
+    numberInUse.total = 0;
+    numberInUse.total2 = 1;
     for(var i = 0; i < AllButExAc.length; i++) {
         AllButExAc[i].disabled = false;
 }
