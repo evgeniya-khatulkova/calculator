@@ -55,6 +55,9 @@ buttonAdd.addEventListener('click', function(e) {
     var result = operate(numberInUse.total, numberInUse.operator, numberInUse.current);
     // var result = addition(numberInUse.total, numberInUse.current);
     windowView.textContent = result;
+    if(windowView.textContent.length > 12){
+        windowView.textContent = windowView.textContent.slice(0,12); 
+    }
     numberInUse.total = result;
     numberInUse.operator = add;
     buttonAdd.classList.add("pressed");
@@ -87,6 +90,9 @@ buttonSub.addEventListener('click', function(e) {
     var result = operate(numberInUse.total, numberInUse.operator, numberInUse.current);
     // var result = substract(numberInUse.total, numberInUse.current);
     windowView.textContent = result;
+    if(windowView.textContent.length > 12){
+        windowView.textContent = windowView.textContent.slice(0,12); 
+    }
     numberInUse.total = result;
     numberInUse.operator = sub;
     buttonSub.classList.add("pressed");
@@ -110,6 +116,9 @@ buttonMult.addEventListener('click', function(e) {
     var result = operate(numberInUse.total, numberInUse.operator, numberInUse.current);
     // var result = multiple(numberInUse.current, numberInUse.total2);
     windowView.textContent = result;
+    if(windowView.textContent.length > 12){
+        windowView.textContent = windowView.textContent.slice(0,12); 
+    }
     numberInUse.total = result;
     numberInUse.total2 = result;
     numberInUse.operator = mult;
@@ -138,9 +147,12 @@ buttonDivi.addEventListener('click', function(e) {
         buttonDivi.classList.add("pressed");
         return;
     }
-    var result = operate(numberInUse.total, numberInUse.operator, numberInUse.current);
+     var result = operate(numberInUse.total, numberInUse.operator, numberInUse.current);
     // var result = division(numberInUse.current, numberInUse.total2);
     windowView.textContent = result;
+    if(windowView.textContent.length > 12){
+        windowView.textContent = windowView.textContent.slice(0,12); 
+    }
     numberInUse.total = result;
     numberInUse.total2 = result;
     numberInUse.operator = divi;
@@ -151,7 +163,7 @@ buttonDivi.addEventListener('click', function(e) {
 //for equal =
 buttonEqual.addEventListener('click', function(e) {
     if(numberInUse.operator === "division" && numberInUse.first === '0') {
-        windowView.textContent = "Don't do it, refresh please";
+        windowView.textContent = "You are crushing it, refresh please";
         for(var i = 0; i < AllButExAc.length; i++) {
             AllButExAc[i].disabled = true;
     }
@@ -159,6 +171,9 @@ buttonEqual.addEventListener('click', function(e) {
     }
     var numN = operate(parseInt(numberInUse.total), numberInUse.operator, parseInt(numberInUse.first));
     windowView.textContent = numN;
+    if(windowView.textContent.length > 12){
+        windowView.textContent = windowView.textContent.slice(0,12); 
+    }
     // numberInUse.total = numN;
     numberInUse.first = numN;
     numberInUse.total = 0;
