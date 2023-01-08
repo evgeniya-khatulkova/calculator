@@ -40,7 +40,15 @@ for (i = 0; i < buttonsNum.length; i++) {
 
 // for addition +
 buttonAdd.addEventListener('click', function(e) {
-    // numberInUse.operator = add;
+    if(buttonsOper.some(hasIt)) {
+        var result = addition(numberInUse.total, numberInUse.current); 
+        // numberInUse.total = result;
+        numberInUse.operator = add;
+        buttonAdd.classList.add("pressed");
+        buttonsOper.forEach(buttonO => {buttonO.classList.remove("pressed")});
+        buttonAdd.classList.add("pressed");
+        return;
+    }
     var saveMe= parseInt(numberInUse.first);
     numberInUse.current = saveMe;
     numberInUse.first = '';
@@ -66,6 +74,14 @@ buttonAdd.addEventListener('click', function(e) {
 
 // for substraction -
 buttonSub.addEventListener('click', function(e) {
+    if(buttonsOper.some(hasIt)) {
+        var result = substract(numberInUse.total, numberInUse.current); 
+        // numberInUse.total = result;
+        numberInUse.operator = sub;
+        buttonsOper.forEach(buttonO => {buttonO.classList.remove("pressed")});
+        buttonSub.classList.add("pressed");
+        return;
+    }
     if(numberInUse.current === '') {
       numberInUse.operator = sub;
       var saveMe= parseInt(numberInUse.first);
@@ -101,6 +117,14 @@ buttonSub.addEventListener('click', function(e) {
 
 //for multiplication *
 buttonMult.addEventListener('click', function(e) {
+    if(buttonsOper.some(hasIt)) {
+        var result = multiple(numberInUse.total, numberInUse.current); 
+        // numberInUse.total = result;
+        numberInUse.operator = mult;
+        buttonsOper.forEach(buttonO => {buttonO.classList.remove("pressed")});
+        buttonMult.classList.add("pressed");
+        return;
+    }
     // numberInUse.operator = mult;
     var saveMe= parseInt(numberInUse.first);
     numberInUse.current = saveMe;
@@ -129,6 +153,14 @@ buttonMult.addEventListener('click', function(e) {
 //for division /
 buttonDivi.addEventListener('click', function(e) {
     // numberInUse.operator = divi;
+    if(buttonsOper.some(hasIt)) {
+        var result = division(numberInUse.total, numberInUse.current); 
+        // numberInUse.total = result;
+        numberInUse.operator = divi;
+        buttonsOper.forEach(buttonO => {buttonO.classList.remove("pressed")});
+        buttonDivi.classList.add("pressed");
+        return;
+    }
     var saveMe= parseInt(numberInUse.first);
     numberInUse.current = saveMe;
     numberInUse.first = '';
