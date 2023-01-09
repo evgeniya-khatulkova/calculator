@@ -118,7 +118,7 @@ buttonSub.addEventListener('click', function(e) {
 //for multiplication *
 buttonMult.addEventListener('click', function(e) {
     if(buttonsOper.some(hasIt)) {
-        var result = multiple(numberInUse.total, numberInUse.current); 
+        var result = multiple(numberInUse.total2, numberInUse.current); 
         // numberInUse.total = result;
         numberInUse.operator = mult;
         buttonsOper.forEach(buttonO => {buttonO.classList.remove("pressed")});
@@ -137,7 +137,7 @@ buttonMult.addEventListener('click', function(e) {
         buttonMult.classList.add("pressed");
         return;
     }
-    var result = operate(numberInUse.total, numberInUse.operator, numberInUse.current);
+    var result = operate(numberInUse.total2, numberInUse.operator, numberInUse.current);
     // var result = multiple(numberInUse.current, numberInUse.total2);
     windowView.textContent = result;
     if(windowView.textContent.length > 12){
@@ -194,6 +194,9 @@ buttonDivi.addEventListener('click', function(e) {
 
 //for equal =
 buttonEqual.addEventListener('click', function(e) {
+    if(numberInUse.operator === '' || numberInUse.first === '' || numberInUse.current === 0) {
+        return
+    }
     if(numberInUse.operator === "division" && numberInUse.first === '0') {
         windowView.textContent = "You are crushing it, refresh please";
         for(var i = 0; i < AllButExAc.length; i++) {
@@ -206,7 +209,6 @@ buttonEqual.addEventListener('click', function(e) {
     if(windowView.textContent.length > 12){
         windowView.textContent = windowView.textContent.slice(0,12); 
     }
-    // numberInUse.total = numN;
     numberInUse.first = numN;
     numberInUse.total = 0;
     numberInUse.total2 = 1;
@@ -221,6 +223,9 @@ buttonAc.addEventListener('click', function(e) {
     numberInUse.first = '';
     numberInUse.total = 0;
     numberInUse.total2 = 1;
+    if(buttonsOper.some(hasIt)) {
+        buttonsOper.forEach(buttonO => {buttonO.classList.remove("pressed")});
+    }
     for(var i = 0; i < AllButExAc.length; i++) {
         AllButExAc[i].disabled = false;
 }
