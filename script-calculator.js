@@ -42,7 +42,6 @@ for (i = 0; i < buttonsNum.length; i++) {
 buttonAdd.addEventListener('click', function(e) {
     if(buttonsOper.some(hasIt)) {
         var result = addition(numberInUse.total, numberInUse.current); 
-        // numberInUse.total = result;
         numberInUse.operator = add;
         buttonAdd.classList.add("pressed");
         buttonsOper.forEach(buttonO => {buttonO.classList.remove("pressed")});
@@ -61,7 +60,6 @@ buttonAdd.addEventListener('click', function(e) {
         return;
     }
     var result = operate(numberInUse.total, numberInUse.operator, numberInUse.current);
-    // var result = addition(numberInUse.total, numberInUse.current);
     windowView.textContent = result;
     if(windowView.textContent.length > 12){
         windowView.textContent = windowView.textContent.slice(0,12); 
@@ -76,7 +74,6 @@ buttonAdd.addEventListener('click', function(e) {
 buttonSub.addEventListener('click', function(e) {
     if(buttonsOper.some(hasIt)) {
         var result = substract(numberInUse.total, numberInUse.current); 
-        // numberInUse.total = result;
         numberInUse.operator = sub;
         buttonsOper.forEach(buttonO => {buttonO.classList.remove("pressed")});
         buttonSub.classList.add("pressed");
@@ -91,7 +88,6 @@ buttonSub.addEventListener('click', function(e) {
       buttonSub.classList.add("pressed");
     return
     }
-    // numberInUse.operator = sub;
     var saveMe= parseInt(numberInUse.first);
     numberInUse.current = saveMe;
     numberInUse.first = '';
@@ -104,7 +100,6 @@ buttonSub.addEventListener('click', function(e) {
         return;
     }
     var result = operate(numberInUse.total, numberInUse.operator, numberInUse.current);
-    // var result = substract(numberInUse.total, numberInUse.current);
     windowView.textContent = result;
     if(windowView.textContent.length > 12){
         windowView.textContent = windowView.textContent.slice(0,12); 
@@ -119,13 +114,11 @@ buttonSub.addEventListener('click', function(e) {
 buttonMult.addEventListener('click', function(e) {
     if(buttonsOper.some(hasIt)) {
         var result = multiple(numberInUse.total2, numberInUse.current); 
-        // numberInUse.total = result;
         numberInUse.operator = mult;
         buttonsOper.forEach(buttonO => {buttonO.classList.remove("pressed")});
         buttonMult.classList.add("pressed");
         return;
     }
-    // numberInUse.operator = mult;
     var saveMe= parseInt(numberInUse.first);
     numberInUse.current = saveMe;
     numberInUse.first = '';
@@ -138,7 +131,6 @@ buttonMult.addEventListener('click', function(e) {
         return;
     }
     var result = operate(numberInUse.total2, numberInUse.operator, numberInUse.current);
-    // var result = multiple(numberInUse.current, numberInUse.total2);
     windowView.textContent = result;
     if(windowView.textContent.length > 12){
         windowView.textContent = windowView.textContent.slice(0,12); 
@@ -152,10 +144,8 @@ buttonMult.addEventListener('click', function(e) {
 
 //for division /
 buttonDivi.addEventListener('click', function(e) {
-    // numberInUse.operator = divi;
     if(buttonsOper.some(hasIt)) {
         var result = division(numberInUse.total, numberInUse.current); 
-        // numberInUse.total = result;
         numberInUse.operator = divi;
         buttonsOper.forEach(buttonO => {buttonO.classList.remove("pressed")});
         buttonDivi.classList.add("pressed");
@@ -180,7 +170,6 @@ buttonDivi.addEventListener('click', function(e) {
         return;
     }
      var result = operate(numberInUse.total, numberInUse.operator, numberInUse.current);
-    // var result = division(numberInUse.current, numberInUse.total2);
     windowView.textContent = result;
     if(windowView.textContent.length > 12){
         windowView.textContent = windowView.textContent.slice(0,12); 
@@ -198,7 +187,7 @@ buttonEqual.addEventListener('click', function(e) {
         return
     }
     if(numberInUse.operator === "division" && numberInUse.first === '0') {
-        windowView.textContent = "You are crushing it, refresh please";
+        windowView.textContent = "Division by 0 is impossible";
         for(var i = 0; i < AllButExAc.length; i++) {
             AllButExAc[i].disabled = true;
     }
@@ -213,11 +202,11 @@ buttonEqual.addEventListener('click', function(e) {
     numberInUse.total = 0;
     numberInUse.total2 = 1;
     numberInUse.current = '';
+    numberInUse.operator = '';
 })
 
 buttonAc.addEventListener('click', function(e) {
     windowView.textContent = '';
-    data = [];
     numberInUse.current = '';
     numberInUse.operator = '';
     numberInUse.first = '';

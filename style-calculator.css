@@ -11,7 +11,7 @@ body{
 }
 
 #device {
-    background-color: #FF6EC7;
+    background-color: #6CB4EE;
     width: 300px;
     height: 430px;
     padding: 19px;
@@ -41,13 +41,6 @@ body{
     gap:20px;
 }
 
-#butoper{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    align-content: space-around;
-}
 
 button{
   height: 38px;
